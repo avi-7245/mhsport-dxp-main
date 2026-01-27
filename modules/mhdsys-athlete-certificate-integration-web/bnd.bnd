@@ -1,0 +1,7 @@
+Bundle-Name: mhdsys-athlete-certificate-integration-web
+Bundle-SymbolicName: com.mhdsys.athlete.certificate.web
+Bundle-Version: 1.0.0
+Export-Package: com.mhdsys.athlete.certificate.web.constants
+Provide-Capability:\
+	liferay.language.resources;\
+		resource.bundle.base.name="content.Language"

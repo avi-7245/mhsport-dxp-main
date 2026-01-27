@@ -1,0 +1,36 @@
+@import 'imports';
+
+@import 'color-schemas';
+
+@import 'base';
+
+@import 'portal';
+
+@import 'taglib';
+
+@import 'application';
+
+@import 'layout';
+
+@import 'navigation';
+
+@import 'portlet';
+
+@import 'extras';
+
+@import 'custom';
+
+/*Site related scss*/
+@import 'utilities';
+
+@import 'navigation'; 
+
+@import 'dark-mode';
+
+@import 'responsiveness';
+
+@import 'fonts';
+
+@import 'color-schemas';
+
+@import 'accebility';

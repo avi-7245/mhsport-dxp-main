@@ -1,0 +1,117 @@
+package com.mhdsys.awards.web.resource.commands;
+
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.Role;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.model.UserNotificationDeliveryConstants;
+import com.liferay.portal.kernel.model.UserNotificationEvent;
+import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
+import com.liferay.portal.kernel.service.RoleLocalServiceUtil;
+import com.liferay.portal.kernel.service.UserLocalServiceUtil;
+import com.liferay.portal.kernel.service.UserNotificationEventLocalServiceUtil;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.mhdsys.awards.web.constants.AwardsCommonConstants;
+import com.mhdsys.awards.web.constants.AwardsWebPortletKeys;
+import com.mhdsys.awards.web.util.AwardsUtil;
+import com.mhdsys.common.api.awards.AwardsCommonApi;
+import com.mhdsys.common.util.NotificationConstants;
+import com.mhdsys.common.utility.constants.RoleConstant;
+import com.mhdsys.schema.model.AwardApplication;
+import com.mhdsys.schema.service.AwardApplicationLocalServiceUtil;
+
+import java.util.List;
+
+import javax.portlet.PortletException;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+
+@Component(immediate = true, property = { "javax.portlet.name=" + AwardsWebPortletKeys.MHDSYSAWARDSWEB,
+		"mvc.command.name="
+				+ AwardsWebPortletKeys.APPLY_AWARD_APPLICATION_MVC_RESOURCE_COMMAND }, service = MVCResourceCommand.class)
+public class ApplyAwardApplicationMVCResourceCommand implements MVCResourceCommand {
+
+	@Reference
+	AwardsCommonApi awardsApi;
+
+	@Reference
+	AwardsUtil awardsUtil;
+
+	private Log LOGGER = LogFactoryUtil.getLog(this.getClass().getName());
+
+	@Override
+	public boolean serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse)
+			throws PortletException {
+		LOGGER.info(" Awards apply Resource Commands ::: ");
+		try {
+			ThemeDisplay themeDisplay = (ThemeDisplay) resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			String selectedIdsJson = ParamUtil.getString(resourceRequest, "selectedIds");
+
+			JSONArray selectedIdsArray = JSONFactoryUtil.createJSONArray(selectedIdsJson);
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+			User user = UserLocalServiceUtil.getUser(themeDisplay.getUserId());
+
+			for (int i = 0; i < selectedIdsArray.length(); i++) {
+				long awardApplicationId = selectedIdsArray.getLong(i);
+				LOGGER.info("awardApplicationId:" + awardApplicationId);
+				AwardApplication awardApplication = AwardApplicationLocalServiceUtil
+						.getAwardApplication(awardApplicationId);
+
+				if (Validator.isNotNull(awardApplication)) {
+					awardApplication.setStatus(AwardsCommonConstants.APPLIED);
+					AwardApplicationLocalServiceUtil.updateAwardApplication(awardApplication);
+				}
+			}
+
+			Role deskOfficer = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), RoleConstant.DESK_OFFICER);
+
+			List<User> deskOfficerUsers = UserLocalServiceUtil.getRoleUsers(deskOfficer.getRoleId());
+
+			try {
+				JSONObject notificationJsonObject = JSONFactoryUtil.createJSONObject();
+
+				List<Role> userRoles = user.getRoles();
+
+				String userRole = null;
+				for (Role role : userRoles) {
+					LOGGER.info("Role Name: " + role.getName());
+					userRole = role.getName();
+				}
+
+				String FarmerTitle = "Awards : " + userRole + " has registered for sports awards";
+
+				notificationJsonObject.put("title", "Review");
+				notificationJsonObject.put("notificationTemplate", FarmerTitle);
+				notificationJsonObject.put("url", "/group/guest/awards");
+
+				for (User deskUser : deskOfficerUsers) {
+					awardsUtil.sendNotification(deskUser, notificationJsonObject);
+				}
+
+				LOGGER.info("Notifications sent to all Desk Officer users successfully.");
+			} catch (Exception e) {
+				LOGGER.error("Error while sending notifications to Desk Officer users: ", e);
+			}
+
+			jsonObject.put("applied", true);
+			resourceResponse.getWriter().write(jsonObject.toString());
+
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage(), e);
+		}
+		LOGGER.info("awards apply saved");
+		return false;
+	}
+
+	
+
+}

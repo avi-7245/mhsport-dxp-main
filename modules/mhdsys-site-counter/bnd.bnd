@@ -1,0 +1,7 @@
+Bundle-Name: mhdsys-site-counter
+Bundle-SymbolicName: mhdsys.site.counter
+Bundle-Version: 1.0.0
+Export-Package: mhdsys.site.counter.constants
+Provide-Capability:\
+	liferay.language.resources;\
+		resource.bundle.base.name="content.Language"

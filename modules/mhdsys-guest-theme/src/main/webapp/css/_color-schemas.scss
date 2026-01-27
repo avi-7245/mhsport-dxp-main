@@ -1,0 +1,258 @@
+//Colors
+$color-schema-one: #861f41; 
+$color-schema-two: #26268e;
+$color-schema-three: #009990;
+$bg-common: #f5f5f5;
+$white: #fffff;
+$grey: #dddddd;
+$black: #000000; 
+
+//maroon Schema
+.maroon {
+#wrapper .maharashtraSports-header,
+#wrapper .common-forms-div .card .card-header,
+#wrapper div.dt-buttons > .dt-button,
+#wrapper .back-btn-cn {
+	background-color: $color-schema-one;
+	color: $white;
+}
+
+ 
+
+.universal-table .table-bordered td, .universal-table .table-bordered th {
+    background: lab(31 45.26 6.5 / 0.1); 
+    border-top: 0px solid $grey;
+}
+
+.universal-table .table-bordered thead td, .table-bordered thead th {
+    color: $color-schema-one; 
+}
+
+.maharashtraSports-dashboard-wrapper .maharashtraSports-main-content .deshbordSidebar .sidebarContent .sidebarList li:hover > a, .maharashtraSports-dashboard-wrapper .maharashtraSports-main-content .deshbordSidebar .sidebarContent .sidebarList li.active > a {
+    background-color: $color-schema-one; 
+}
+
+#wrapper button {
+	border: none !important;
+	/*color: #fff !important;*/
+}
+
+.dashboardPage .card {
+	border-left: 5px solid $color-schema-one;
+}
+
+.dashboardPage a .card p,
+.common-forms-div .card .card-body .form-group label {
+    color: $color-schema-one; 
+}
+
+.dashboardPage .card:hover {
+    background: $color-schema-one;
+}
+
+.common-forms-div .card .card-body .btn {
+	background-color: $color-schema-one;
+    border-color: $color-schema-one;
+}
+
+.universal-table .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    background-color: $color-schema-one;
+}
+
+.card-body .card .card-body {
+	background: lab(31 45.26 6.5 / 0.1); 
+}
+
+.common-forms-div .card .card-body .form-group .form-control {
+    border: 1px solid $grey !important;
+    color: $black !important; 
+    background: $white;
+}
+
+
+/*CMS Screens*/
+.mdsys .top-bar,
+.keyperson-bg .card {
+	background-color: $color-schema-one !important;
+}
+
+
+.mdsys .boder {
+    background-color: $white !important;
+}
+
+
+.languageDropdown .portlet-body .dropdown,
+.mdsys ul.social-media-icon li a {
+	border: 1px solid $white !important;
+}
+
+.mdsys .logo-menu {
+    border-left: 7px solid $color-schema-one;
+}
+
+.keyperson-bg h4 {
+    color: $color-schema-one;
+}
+
+.keyperson-bg {
+    background: $white !important;
+}
+
+.downloads-bg .textFields .card {
+    background: $color-schema-one !important;
+}
+
+.drugslist-card {
+    box-shadow: none !important;
+}
+
+.youthService-bg h4 {
+    color: $color-schema-one !important;
+}
+
+.youthService-bg h4:after {
+    background: $color-schema-one !important;
+}
+
+.textFields h5 {
+    color: $color-schema-one !important;
+}
+
+.special-btn { 
+    background-color: $color-schema-one; 
+}
+
+.gradient-card, 
+#scroll,
+.gradientBg,
+.mdsys .footer-bootom-bar { 
+    background: $color-schema-one !important;
+}
+
+.mdsys footer:before { 
+    background-color: #5e5e5e;
+}
+
+footer .social-media img, footer .contact-info img {
+	filter: invert(16%) sepia(71%) saturate(5644%) hue-rotate(320deg) brightness(89%) contrast(95%);
+}
+
+.subscribe form button {
+	background-color: $color-schema-one;
+}
+.downloads-bg h4 {
+    color: $color-schema-one !important;
+}
+
+.downloads-bg h4:after {
+    background: $color-schema-one !important;
+}
+
+.footer-bootom-bar { 
+    background: $color-schema-one;
+}
+
+.subscribe .d-flex .bi-envelope {
+    color: $color-schema-one;
+}
+
+.megamenu-bg .child-menu-items .menu-links {
+	color: $color-schema-one !important;
+}
+
+.component-tabs .navigation-bar-light .nav-link.active {
+	background-color: $color-schema-one;	
+}
+
+.common-forms-div .card .card-header {
+	background: $color-schema-one !important;
+}
+
+#circularList thead tr {
+    background: $color-schema-one !important;
+}
+
+/*.common-forms-div .card {
+    border-radius: 0.25rem;
+}*/
+
+.panel-body .form-control {
+	border: 1px solid $grey !important;
+}
+
+.common-forms-div .card .card-footer .btn {
+    background-color: $color-schema-one;
+    border-color: transparent !important; 
+}
+
+.custom-file-label::after { 
+    background-color: $color-schema-one !important; 
+    color: #fff!important;
+}
+
+/*Tab*/
+.newTabs .nav-pills .nav-link {
+  background-color: $white !important; 
+  color: $black !important; 
+ 
+}
+
+/* Active tab style */
+.newTabs .nav-pills .nav-link.active {
+  background-color: $color-schema-one !important;
+  color: $white !important;
+  
+}
+
+/*back-btn*/
+#wrapper div.dt-buttons > .dt-button,
+#wrapper .card .card-header .back-btn-cn {
+	background-color: $color-schema-one!important;
+	color: $white;
+} 	
+}
+
+
+  
+
+//Maroon Default changes
+.keyperson-bg .card, 
+.downloads-bg .textFields .card, 
+.downloads-bg h4:after, 
+.gradientBg,
+.gradient-card, 
+.youthService-bg h4:after,
+.mdsys .footer-bootom-bar,
+.mdsys .subscribe form button,
+#scroll {
+    background: $color-schema-one;
+}
+
+
+.drugslist-card {
+	box-shadow: none !important;
+}
+
+/* Target only the filter card */
+body.maroon .filter-card .card .card-body {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+#filterCard .card-body {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+.card-header-footer {
+background: #861f41!important;
+}
+.btn-secondary{
+background-color: #861f41!important;
+border-color: #861f41!important;
+}
+
+.btn-secondary:hover{
+background-color: #861f41!important;
+border-color: #861f41!important;
+}
